@@ -1,0 +1,7 @@
+---
+- name: Skeleton Ansible Playbook
+  hosts: localhost
+  gather_facts: yes
+
+  roles:
+    - common
