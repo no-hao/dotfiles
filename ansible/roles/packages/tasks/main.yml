@@ -1,0 +1,30 @@
+- name: Install Development CLI tools using Homebrew
+  community.general.homebrew:
+    name:
+      # Development Tools
+      - neovim          # Modern Vim editor
+      - fzf             # Fuzzy file finder
+      - ripgrep         # Fast content search
+      - bat             # Enhanced 'cat' with syntax highlighting
+      - fd              # Better 'find'
+      - lazygit         # Terminal Git UI
+      - shfmt           # Shell script formatter
+      - tealdeer        # Simplified 'tldr' manual pages
+      - tmux            # Terminal multiplexer
+      - wget            # File downloader
+      - zoxide          # Smarter 'cd' replacement
+      - starship        # Shell prompt
+      - git             # Version control
+
+- name: Install Terminal Emulators using Homebrew Casks
+  community.general.homebrew_cask:
+    name:
+      # Terminal Emulators
+      - wezterm         # GPU-accelerated terminal emulator
+      # - ghostty       # Lightweight terminal emulator
+
+- name: Install Communication Tools using Homebrew Casks
+  community.general.homebrew_cask:
+    name:
+      # Communication Tools
+      - discord         # Chat and communication

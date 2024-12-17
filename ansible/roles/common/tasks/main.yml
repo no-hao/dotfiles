@@ -1,4 +1,0 @@
----
-- name: Confirm Ansible is working
-  debug:
-    msg: "Ansible has successfully run the playbook!"

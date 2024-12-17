@@ -1,7 +1,8 @@
 ---
-- name: Skeleton Ansible Playbook
+- name: Setup Development Environment
   hosts: localhost
   gather_facts: yes
 
   roles:
-    - common
+    - dotfiles
+    - packages
