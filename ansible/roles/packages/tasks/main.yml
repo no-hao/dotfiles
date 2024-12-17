@@ -1,4 +1,5 @@
-- name: Install Development CLI tools using Homebrew
+# macOS Installation
+- name: Install tools on macOS using Homebrew
   community.general.homebrew:
     name:
       # Development Tools
@@ -16,15 +17,42 @@
       - starship        # Shell prompt
       - git             # Version control
 
-- name: Install Terminal Emulators using Homebrew Casks
-  community.general.homebrew_cask:
-    name:
       # Terminal Emulators
       - wezterm         # GPU-accelerated terminal emulator
-      # - ghostty       # Lightweight terminal emulator
+    state: present
+    update_homebrew: yes
+  when: is_mac
 
-- name: Install Communication Tools using Homebrew Casks
+- name: Install GUI tools on macOS using Homebrew Casks
   community.general.homebrew_cask:
     name:
-      # Communication Tools
       - discord         # Chat and communication
+    state: present
+  when: is_mac
+
+# Linux Installation
+- name: Install tools on Linux
+  ansible.builtin.package:
+    name:
+      # Development Tools
+      - neovim
+      - fzf
+      - ripgrep
+      - bat
+      - fd-find         # fd on Linux
+      - lazygit
+      - shfmt
+      - tldr
+      - tmux
+      - wget
+      - zoxide
+      - starship
+      - git
+
+      # Terminal Emulators
+      - wezterm
+
+      # Communication Tools
+      - discord
+    state: present
+  when: is_linux

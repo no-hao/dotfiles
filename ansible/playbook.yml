@@ -1,8 +1,32 @@
----
 - name: Setup Development Environment
   hosts: localhost
   gather_facts: yes
+  connection: local
+
+  pre_tasks:
+    - name: Detect Operating System and Set Variables
+      ansible.builtin.set_fact:
+        is_mac: "{{ ansible_os_family == 'Darwin' }}"
+        is_linux: "{{ ansible_os_family in ['RedHat', 'Debian'] }}"
+        is_wsl: "{{ 'microsoft' in ansible_kernel | lower }}"
+        brew_path: >-
+          {{ '/usr/local/bin/brew' if ansible_architecture == 'x86_64' else '/opt/homebrew/bin/brew' }}
+      tags:
+        - always
+
+    - name: Debug Detected Environment
+      ansible.builtin.debug:
+        msg: |
+          Detected Environment:
+            OS Family: {{ ansible_os_family }}
+            Architecture: {{ ansible_architecture }}
+            macOS: {{ is_mac }}
+            Linux: {{ is_linux }}
+            WSL: {{ is_wsl }}
+            Homebrew Path: {{ brew_path }}
+      tags:
+        - always
 
   roles:
-    - dotfiles
     - packages
+    - dotfiles
