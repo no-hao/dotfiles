@@ -1,0 +1,31 @@
+# Define the list of Nerd Fonts
+- name: Set Nerd Fonts list
+  ansible.builtin.set_fact:
+    nerd_fonts:
+      - FiraCode
+      - DejaVuSansMono
+      - JetBrainsMono
+      - FantasqueSansMono
+      - VictorMono
+      - SourceCodePro
+      - Hack
+
+# Install Nerd Fonts on macOS
+- name: Install Nerd Fonts on macOS
+  ansible.builtin.unarchive:
+    src: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ item }}.zip"
+    dest: ~/Library/Fonts/
+    remote_src: true
+  when: is_mac
+  loop: "{{ nerd_fonts }}"
+
+# Install Nerd Fonts on Linux
+- name: Install Nerd Fonts on Linux
+  ansible.builtin.unarchive:
+    src: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ item }}.zip"
+    dest: ~/.local/share/fonts/{{ item }}
+    creates: ~/.local/share/fonts/{{ item }}/done
+    remote_src: true
+  notify: update font cache
+  when: is_linux
+  loop: "{{ nerd_fonts }}"

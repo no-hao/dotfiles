@@ -28,5 +28,6 @@
         - always
 
   roles:
-    - packages
-    - dotfiles
+    - packages   # Installs development tools
+    - dotfiles   # Configures dotfiles
+    - fonts      # Downloads and installs fonts
